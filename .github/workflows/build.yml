@@ -18,10 +18,10 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: "build"
-      run: make
+      run: cd ssl && make
 
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-        files: assets.tar.gz
+        files: ssl/assets.tar.gz
