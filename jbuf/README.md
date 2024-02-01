@@ -12,7 +12,7 @@ cmake --build build -j
 ## Usage
 
 ```bash
-sudo build/sipp -sf scenarios/uac_pcap.xml 127.0.0.1 -m 1
+sudo sipp/build/sipp -sf scenarios/uac_pcap_opus.xml 127.0.0.1 -m 1 -key pcap pcap/opus_audio_500hz_linux_qdisc_delay_50ms.pcap
 ```
 
 ## PCAP's
