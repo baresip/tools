@@ -39,7 +39,7 @@ set xlabel "time/ms"
 set ylabel "delay (ms)"
 
 stats "jbuf_recv_delay.dat" using ($2) name "N"
-stats "jbuf_late_loss.dat" using ($2) name "L" nooutput
+stats "jbuf_late_play.dat" using ($2) name "L" nooutput
 
 plot 'jbuf_recv_delay.dat' using ($1/1000):2 title 'receive' with linespoints, \
   'jbuf_play_delay.dat' using ($1/1000):2 title 'playout' with points, \
