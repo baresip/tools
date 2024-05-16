@@ -2,22 +2,46 @@
 
 trace_file="../../re_trace.json"
 
-function gen_datfile() {
-    ph=$1
-    filename=$2
+function gen_datfile_arg() {
+    cat=$1
+    ph=$2
+    id=$3
+    filename=data/${cat}_${ph}.dat
 
-    jqc=".traceEvents[] | select (.id == \"audio\" and .cat == \"jbuf\" and .name == \"${ph}\") | \"\(.ts),\(.args.${ph})\""
+    jqc=".traceEvents[] | select (.id == \"${id}\" and .cat == \"${cat}\" and .name == \"${ph}\") | \"\(.ts),\(.args.${ph})\""
     jq -c "${jqc}" ${trace_file} | sed 's/"//g' > "${filename}"
 }
 
-gen_datfile recv_delay jbuf_recv_delay.dat
-gen_datfile play_delay jbuf_play_delay.dat
-gen_datfile jitter_adjust jbuf_jitter_adapt.dat
-gen_datfile playout_diff jbuf_playout_diff.dat
-gen_datfile clock_skew jbuf_clock_skew.dat
-gen_datfile get jbuf_get.dat
-gen_datfile late_play jbuf_late_play.dat
-gen_datfile jitter jbuf_jitter.dat
+function gen_datfile() {
+    cat=$1
+    ph=$2
+    id=$3
+    filename=data/${cat}_${ph}.dat
 
-./jbuf.plot
-./jbuf_clocks.plot
+    jqc=".traceEvents[] | select (.id == \"${id}\" and .cat == \"${cat}\" and .name == \"${ph}\") | \"\(.ts)\""
+    jq -c "${jqc}" ${trace_file} | sed 's/"//g' > "${filename}"
+}
+
+mkdir -p data
+
+gen_datfile_arg jbuf recv_delay audio
+gen_datfile_arg jbuf play_delay audio
+gen_datfile_arg jbuf jitter_adjust audio
+gen_datfile_arg jbuf playout_diff audio
+gen_datfile_arg jbuf clock_skew audio
+gen_datfile_arg jbuf get audio
+gen_datfile_arg jbuf late_play audio
+gen_datfile_arg jbuf jitter audio
+gen_datfile_arg aubuf cur_sz_ms aureceiver
+gen_datfile_arg aubuf append_delay aureceiver
+gen_datfile_arg aubuf read_delay aureceiver
+gen_datfile aubuf underrun aureceiver 
+gen_datfile aubuf overrun aureceiver
+gen_datfile aubuf filling aureceiver
+
+pkill -f gnuplot
+./jbuf.plot &
+./jbuf_clocks.plot &
+./aubuf.plot &
+
+wait
