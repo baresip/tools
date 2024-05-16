@@ -5,6 +5,7 @@
 ```bash
 git clone https://github.com/SIPp/sipp
 cd sipp
+git checkout v3.7.2
 cmake -B build -DUSE_PCAP=1
 cmake --build build -j
 ```
