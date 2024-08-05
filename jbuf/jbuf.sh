@@ -32,6 +32,7 @@ gen_datfile_arg jbuf clock_skew audio
 gen_datfile_arg jbuf get audio
 gen_datfile_arg jbuf late_play audio
 gen_datfile_arg jbuf jitter audio
+gen_datfile_arg jbuf lost audio
 gen_datfile_arg aubuf cur_sz_ms aureceiver
 gen_datfile_arg aubuf append_delay aureceiver
 gen_datfile_arg aubuf read_delay aureceiver
