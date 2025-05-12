@@ -1,4 +1,4 @@
-OPENSSL_VERSION := "3.3.0"
+OPENSSL_VERSION := "3.5.0"
 OPENSSL_MIRROR := "https://www.openssl.org/source"
 
 LIBRESSL_VERSION := "4.1.0"
