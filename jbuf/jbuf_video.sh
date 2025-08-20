@@ -1,6 +1,11 @@
 #!/bin/bash
 
-trace_file="../../re_trace.json"
+trace_file=$1
+
+if [ ! -f "$trace_file" ]; then
+    echo "Usage $0 ./path/to/re_trace.json" 
+    exit 1
+fi
 
 function gen_datfile_arg() {
     cat=$1
