@@ -2,6 +2,9 @@
 
 ## Build
 
+
+#### SIPp
+
 ```bash
 git clone https://github.com/SIPp/sipp
 cd sipp
@@ -10,10 +13,19 @@ cmake -B build -DUSE_PCAP=1
 cmake --build build -j
 ```
 
+#### libre/baresip
+
+```bash
+cmake -B build -DUSE_TRACE=ON -DCMAKE_C_FLAGS="-DJBUF_TRACE -DAUBUF_TRACE -DTRACE_BUFFER_SIZE=10000000 -DRE_RTP_PCAP"
+cmake --build build -j
+```
+
 ## Usage
 
 ```bash
-sudo sipp/build/sipp -sf scenarios/uac_pcap_opus.xml 127.0.0.1 -m 1 -key pcap pcap/opus_audio_500hz_linux_qdisc_delay_50ms.pcap
+sudo sipp/build/sipp -sf scenarios/uac_pcap_opus.xml [BARESIP IP] -m 1 -key pcap pcap/opus_audio_500hz_linux_qdisc_delay_50ms.pcap
+./jbuf.sh ./path/to/re_trace.json
+./jbuf_video.sh ./path/to/re_trace.json
 ```
 
 ## PCAP's
