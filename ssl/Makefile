@@ -1,7 +1,7 @@
-OPENSSL_VERSION := "4.0.0"
+OPENSSL_VERSION := "4.0.3"
 OPENSSL_MIRROR := "https://www.openssl.org/source"
 
-LIBRESSL_VERSION := "4.3.1"
+LIBRESSL_VERSION := "4.3.2"
 LIBRESSL_MIRROR := "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL"
 
 
