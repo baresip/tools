@@ -15,14 +15,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v7
 
     - name: "build"
       run: cd ssl && make
 
     - name: Release
-      uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v3
+      if: github.ref_type == 'tag'
       with:
         files: ssl/assets.tar.gz
 
@@ -34,7 +34,7 @@ jobs:
       PREFIX: "${{ github.workspace }}\\ssl\\openssl-windows-x64"
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v7
 
     - name: "install nasm"
       shell: bash
@@ -73,7 +73,7 @@ jobs:
         retention-days: 7
 
     - name: Release
-      uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v3
+      if: github.ref_type == 'tag'
       with:
         files: ssl/openssl-windows-x64.zip
